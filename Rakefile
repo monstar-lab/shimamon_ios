@@ -2,12 +2,6 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 
-module REXML
-  class Child; end
-end
-
-require 'rexml/document'
-
 begin
   require 'bundler'
   Bundler.require
