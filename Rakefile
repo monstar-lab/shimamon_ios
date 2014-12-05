@@ -15,6 +15,7 @@ Motion::Project::App.setup do |app|
   app.identifier = 'com.monstar-lab.shimane.shimamon'
   app.pods do
     pod 'AFNetworking'
+    pod 'GDataXML-HTML'
   end
   app.icons = ['icon-29.png', 'icon-29@2x.png', 'icon-29@3x.png', 'icon-40@3x.png', 'icon-60@3x.png', 'icon-76.png', 'icon-76@2x.png']
   app.device_family = [:iphone, :ipad]

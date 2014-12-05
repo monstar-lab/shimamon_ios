@@ -56,6 +56,8 @@ GEM
     thread_safe (0.3.4)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    wakizashi (0.1.1)
+      motion-cocoapods (>= 1.0.1)
     xcodeproj (0.20.2)
       activesupport (>= 3)
       colored (~> 1.2)
@@ -68,3 +70,4 @@ DEPENDENCIES
   bubble-wrap
   motion-cocoapods
   rake
+  wakizashi
