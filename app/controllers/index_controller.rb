@@ -45,10 +45,21 @@ class IndexController < UIViewController
     cell.detailTextLabel.text = @posts[indexPath.row].posted_at + ' by ' + @posts[indexPath.row].author_name
     cell.detailTextLabel.textColor = UIColor.grayColor
 
-    imageURL = NSURL.URLWithString(@posts[indexPath.row].cover_photo_url)
-    nsData = NSData.dataWithContentsOfURL(imageURL)
-    image = UIImage.imageWithData(nsData)
-    cell.imageView.image = image
+    # ↓を有効にすると、ページ読み込みごとに全cellのりレンダリングが走る感じで苦しい
+    #   無効にすると、下から出てくるcellにループ対面のデータが入っているのが一瞬みえてから更新されて苦しい……
+    # cell.imageView.image = nil
+
+    Dispatch::Queue.concurrent.async{
+      # 重い処理を別スレッドでやる
+      imageURL = NSURL.URLWithString(@posts[indexPath.row].cover_photo_url)
+      nsData = NSData.dataWithContentsOfURL(imageURL)
+      image = UIImage.imageWithData(nsData)
+      Dispatch::Queue.main.async{
+        # UI更新はメインスレッドから叩く
+        cell.imageView.image = image
+        cell.layoutSubviews
+      }
+    }
 
     cell
   end
@@ -67,11 +78,8 @@ class IndexController < UIViewController
   def scrollViewDidScroll(scrollView)
     if @table.contentOffset.y >= @table.contentSize.height - @table.bounds.size.height
       return if @indicator.isAnimating
-
-#      if @last_items_size >= (@page + 1) * READ_COUNT
-        start_indicator
-        self.performSelector('load_more', withObject: nil, afterDelay: 1.0)
-  #    end
+      start_indicator
+      self.performSelector('load_more', withObject: nil, afterDelay: 1.0)
     end
   end
 
