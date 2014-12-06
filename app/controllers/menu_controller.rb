@@ -32,17 +32,19 @@ class MenuController < UIViewController
 
     margin = Device.orientation.to_s.match(/\Alandscape/) ? 25 : 50
     top = Device.orientation.to_s.match(/\Alandscape/) ? 70 : 150
+    margin_h = Device.orientation.to_s.match(/\Alandscape/) ? 200 : 100
 
     Motion::Layout.new do |layout|
       layout.view self.view
-      layout.metrics height: 32, margin: margin, top: top
+      layout.metrics width: 150, height: 32, margin: margin, top: top, margin_h: margin_h
       layout.subviews staff: @staff, contact: @contact, close: @close, label: @label
       layout.vertical "|-top-[staff(height)]-margin-[contact(height)]-margin-[close(height)]-100-[label(100)]-20-|"
-      layout.horizontal "|-40-[staff]-40-|"
-      layout.horizontal "|-40-[contact]-40-|"
-      layout.horizontal "|-40-[close]-40-|"
+      layout.horizontal "|-margin_h-[staff]-margin_h-|"
+      layout.horizontal "|-margin_h-[contact]-margin_h-|"
+      layout.horizontal "|-margin_h-[close]-margin_h-|"
       layout.horizontal "|-40-[label]-40-|"
     end
+
   end
 
   def close

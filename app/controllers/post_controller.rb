@@ -14,6 +14,14 @@ class PostController < UIViewController
       v.delegate = self
       view.addSubview(v)
     end
+
+    Motion::Layout.new do |layout|
+      layout.view self.view
+      layout.subviews webview: @webview
+      layout.vertical "|[webview]|"
+      layout.horizontal "|[webview]|"
+    end
+
   end
 
   def title

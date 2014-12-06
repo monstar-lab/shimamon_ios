@@ -20,6 +20,13 @@ class IndexController < UIViewController
     @table.dataSource = self
     @table.delegate = self
 
+    Motion::Layout.new do |layout|
+      layout.view self.view
+      layout.subviews table: @table
+      layout.vertical "|[table]|"
+      layout.horizontal "|[table]|"
+    end
+
     @next_page = 1
     @posts = []
     @indicator = UIActivityIndicatorView.alloc.initWithActivityIndicatorStyle(UIActivityIndicatorViewStyleGray)
