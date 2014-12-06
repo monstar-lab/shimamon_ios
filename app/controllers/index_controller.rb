@@ -2,7 +2,15 @@ class IndexController < UIViewController
   def viewDidLoad
     super
 
-    self.title = "記事一覧"
+    self.title = "しまもん・記事一覧"
+
+    menu_button = BW::UIBarButtonItem.styled(:plain, '⚙') { show_menu }
+    menu_button.setTitleTextAttributes({
+      UITextAttributeFont => UIFont.fontWithName('Helvetica', size:24),
+      UITextAttributeTextShadowColor => UIColor.colorWithWhite(0.0, alpha:0.4),
+      UITextAttributeTextColor => UIColor.grayColor
+    }, forState:UIControlStateNormal)
+    self.navigationItem.RightBarButtonItem = menu_button;
 
     @table = UITableView.alloc.initWithFrame(self.view.bounds)
     @table.rowHeight = 80
@@ -18,6 +26,14 @@ class IndexController < UIViewController
     @indicator.stopAnimating
 
     load_more
+  end
+
+  def show_menu
+    menu_controller = MenuController.alloc.initWithNibName(nil, bundle:nil)
+    self.presentViewController(
+      UINavigationController.alloc.initWithRootViewController(menu_controller),
+      animated:true,
+      completion: lambda {})
   end
 
   def load_more
