@@ -22,7 +22,7 @@ class MenuController < UIViewController
 
     @label = UILabel.new
     @label.textColor = UIColor.grayColor
-    @label.text = '本アプリは、RubyでネイティブiOSアプリを開発できる「RubyMotion」を利用して制作されました'
+    @label.text = '本アプリは、RubyでネイティブiOSアプリを開発できる「RubyMotion」を利用して制作しました。サーバはRuby on Sinatraです。'
     @label.sizeToFit
     @label.lineBreakMode = NSLineBreakByWordWrapping
     @label.numberOfLines = 0
