@@ -19,4 +19,5 @@ Motion::Project::App.setup do |app|
   app.icons = ['icon-29.png', 'icon-29@2x.png', 'icon-29@3x.png', 'icon-40@3x.png', 'icon-60@3x.png', 'icon-76.png', 'icon-76@2x.png']
   app.device_family = [:iphone, :ipad]
   app.provisioning_profile = '/Users/bp/Library/MobileDevice/Provisioning Profiles/d91265d6-5f31-40f7-b8ae-6308f8388a4c.mobileprovision'
+  app.info_plist['NSAppTransportSecurity'] = { 'NSAllowsArbitraryLoads' => true }
 end
