@@ -30,6 +30,25 @@ class MenuController < UIViewController
     @label.sizeToFit
     self.view.addSubview(@label)
 
+    adjust_views_for_orientation
+  end
+
+  def viewWillAppear(animated)
+    super
+
+    @orientation_observer = App.notification_center.observe UIDeviceOrientationDidChangeNotification do |notification|
+      adjust_views_for_orientation
+    end
+  end
+
+  def viewWillDisappear(animated)
+    super
+
+    App.notification_center.unobserve @orientation_observer
+  end
+
+  def adjust_views_for_orientation
+    puts Device.orientation.to_s
     margin = Device.orientation.to_s.match(/\Alandscape/) ? 25 : 50
     top = Device.orientation.to_s.match(/\Alandscape/) ? 70 : 150
     margin_h = Device.orientation.to_s.match(/\Alandscape/) ? 200 : 100
@@ -38,13 +57,12 @@ class MenuController < UIViewController
       layout.view self.view
       layout.metrics width: 150, height: 32, margin: margin, top: top, margin_h: margin_h
       layout.subviews staff: @staff, contact: @contact, close: @close, label: @label
-      layout.vertical "|-top-[staff(height)]-margin-[contact(height)]-margin-[close(height)]-100-[label(100)]-20-|"
+      layout.vertical "|-top-[staff(height)]-margin-[contact(height)]-margin-[close(height)]-100@600-[label(100)]-20-|"
       layout.horizontal "|-margin_h-[staff]-margin_h-|"
       layout.horizontal "|-margin_h-[contact]-margin_h-|"
       layout.horizontal "|-margin_h-[close]-margin_h-|"
       layout.horizontal "|-40-[label]-40-|"
     end
-
   end
 
   def close

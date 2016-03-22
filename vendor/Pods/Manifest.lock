@@ -26,6 +26,6 @@ DEPENDENCIES:
   - AFNetworking (~> 2.5.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: 86df366d46ebb9f15074a8e7c6eb9fd41fa8b501
 
 COCOAPODS: 0.39.0

@@ -71,3 +71,6 @@ DEPENDENCIES
   motion-cocoapods
   motion-layout
   rake
+
+BUNDLED WITH
+   1.11.2

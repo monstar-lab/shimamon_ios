@@ -87,7 +87,7 @@ class IndexController < UIViewController
     cell
   end
 
- def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
     PostController.new.tap do |post_controller|
